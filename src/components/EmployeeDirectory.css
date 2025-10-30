@@ -1,0 +1,197 @@
+.employee-directory {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.directory-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.directory-header h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.employee-count {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.employee-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.employee-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.employee-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.employee-photo {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.employee-photo img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #f0f0f0;
+}
+
+.photo-placeholder {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #f0f0f0;
+}
+
+.initials {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.employee-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.employee-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.employee-title {
+  font-size: 0.95rem;
+  color: #555;
+  margin: 0;
+}
+
+.employee-department {
+  font-size: 0.9rem;
+  color: #777;
+  margin: 0;
+}
+
+.employee-email {
+  font-size: 0.85rem;
+  color: #0066cc;
+  text-decoration: none;
+  word-break: break-all;
+  transition: color 0.2s ease;
+}
+
+.employee-email:hover {
+  color: #004499;
+  text-decoration: underline;
+}
+
+.employee-location {
+  font-size: 0.85rem;
+  color: #888;
+  margin: 0;
+}
+
+.loading-container,
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding: 2rem;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-container p {
+  margin-top: 1rem;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.error-message {
+  color: #d32f2f;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.retry-button {
+  padding: 0.75rem 1.5rem;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.retry-button:hover {
+  background: #5568d3;
+}
+
+@media (max-width: 768px) {
+  .employee-directory {
+    padding: 1rem;
+  }
+
+  .directory-header h1 {
+    font-size: 2rem;
+  }
+
+  .employee-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  .employee-card {
+    padding: 1rem;
+  }
+
+  .employee-photo img,
+  .photo-placeholder {
+    width: 100px;
+    height: 100px;
+  }
+
+  .initials {
+    font-size: 2rem;
+  }
+}
