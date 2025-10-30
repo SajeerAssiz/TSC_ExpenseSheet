@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useMsal, useIsAuthenticated } from '@azure/msal-react';
 import { loginRequest } from './authConfig';
 import EmployeeDirectory from './components/EmployeeDirectory';
@@ -7,11 +6,6 @@ import './App.css';
 function App() {
   const { instance } = useMsal();
   const isAuthenticated = useIsAuthenticated();
-
-  useEffect(() => {
-    // Initialize MSAL
-    instance.initialize();
-  }, [instance]);
 
   const handleLogin = () => {
     instance.loginPopup(loginRequest).catch((e) => {
