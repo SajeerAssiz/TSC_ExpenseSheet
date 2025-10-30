@@ -1,8 +1,8 @@
 // MSAL configuration
 export const msalConfig = {
   auth: {
-    clientId: "YOUR_CLIENT_ID", // Replace with your Azure AD Application (client) ID
-    authority: "https://login.microsoftonline.com/YOUR_TENANT_ID", // Replace with your tenant ID
+    clientId: "db552657-e6d1-48d3-a58f-397cdcea73fe", // Azure AD Application (client) ID
+    authority: "https://login.microsoftonline.com/ce5c9e34-9906-4081-8a98-69ec394244f1", // Tenant ID
     redirectUri: window.location.origin, // Must match the redirect URI registered in Azure AD
   },
   cache: {
