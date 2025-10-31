@@ -444,6 +444,10 @@
                 if (redirectResponse) {
                     myMSALObj.setActiveAccount(redirectResponse.account);
                     console.log('Redirect response received, consent granted');
+                    // Use the access token from the redirect response
+                    accessToken = redirectResponse.accessToken;
+                    await loadUserProfile();
+                    return;
                 }
             } catch (error) {
                 console.error('Redirect error:', error);
