@@ -1,6 +1,24 @@
 # Profile Page Versions
 
-## Version 4 (profile-v4.html) - Current Testing Version 🔥
+## Version 5 (profile-v5.html) - Current Testing Version 🔥
+**Status**: Testing - Enhanced Error Logging
+**Date**: 2025-10-31
+
+### NEW Features:
+- ✅ Page loads successfully (v4 bug is fixed!)
+- ✅ Enhanced error logging for photo upload
+- ✅ Enhanced error logging for profile updates
+- ✅ Shows EXACT error messages from Microsoft Graph API
+- ✅ Logs request data being sent
+- ✅ Logs response status and details
+- ✅ Parses and displays error code and message
+
+### Test URL:
+https://sajeerassiz.github.io/TSC_ExpenseSheet/profile-v5.html
+
+---
+
+## Version 4 (profile-v4.html) - Previous Version
 **Status**: Testing - Bug Fixed!
 **Date**: 2025-10-31
 
