@@ -1,200 +1,356 @@
-# Office 365 Employee Directory
+# 🚀 TSC Business Intelligence Platform
 
-A React web application that displays images and information of all employees from your Microsoft Office 365 tenant using Microsoft Graph API.
+AI-Powered business operations platform for The Solution Consulting FZCO, featuring autonomous project management, employee efficiency tracking, and comprehensive business process automation.
 
-## Features
+## 🎯 Platform Vision
 
-- Microsoft authentication using MSAL (Microsoft Authentication Library)
-- Display all employees with their profile photos
-- Show employee information including:
-  - Display name
-  - Job title
-  - Department
-  - Email address
-  - Office location
-- Responsive grid layout
-- Automatic fallback to initials when photo is unavailable
-- Beautiful gradient design with hover effects
+A modular, AI-driven platform that covers the entire business lifecycle:
 
-## Prerequisites
+### **Current Modules:**
+- ✅ **Employee Management** - Profiles, org chart, directory
+- ✅ **Photo Management** - Microsoft Graph integration for profile photos
+- 🔄 **AI Project Manager** - Autonomous task assignment and monitoring (in development)
 
-Before you begin, ensure you have:
+### **Planned Modules:**
+- 🔄 **Employee Efficiency Tracking** - Real-time performance analytics
+- 🔄 **Pre-Sales** - Lead management, proposal generation
+- 🔄 **Sales Pipeline** - CRM, forecasting, AI insights
+- 🔄 **Project Management** - Planning, scoping, resource allocation
+- 🔄 **Documentation** - AI-powered document generation
+- 🔄 **Scoping & Estimation** - Requirements analysis, effort estimation
 
-- Node.js (version 14 or higher)
-- npm or yarn package manager
-- A Microsoft 365 tenant (Office 365)
-- Administrator access to Azure AD to register an application
+## 🏗️ Architecture
 
-## Azure AD Application Setup
+### **Frontend:**
+- HTML/CSS/JavaScript (Static Web App)
+- React (future migration)
+- Deployed on Azure Static Web Apps
+- Authentication: Azure AD / Microsoft Entra ID
 
-### Step 1: Register a new application in Azure AD
+### **Backend:**
+- Azure Functions (Serverless APIs)
+- RESTful architecture
+- CI/CD via GitHub Actions
 
-1. Go to [Azure Portal](https://portal.azure.com)
-2. Navigate to **Azure Active Directory** > **App registrations**
-3. Click **New registration**
-4. Fill in the following:
-   - **Name**: Office 365 Employee Directory (or any name you prefer)
-   - **Supported account types**: Select "Accounts in this organizational directory only"
-   - **Redirect URI**: Select "Single-page application (SPA)" and enter `http://localhost:5173`
-5. Click **Register**
+### **Data Layer (Hybrid - Cost Optimized):**
+```
+📊 Azure Cosmos DB (FREE TIER)
+   ├── Employees (extended profiles)
+   ├── Projects
+   ├── Tasks
+   └── AI Decisions
 
-### Step 2: Configure API permissions
+📝 Azure Table Storage ($1-2/month)
+   ├── Work Logs
+   ├── Activity Events
+   └── Metrics History
 
-1. In your app registration, go to **API permissions**
-2. Click **Add a permission**
-3. Select **Microsoft Graph**
-4. Select **Delegated permissions**
-5. Add the following permissions:
-   - `User.Read` (should be added by default)
-   - `User.Read.All` (required to read all users)
-6. Click **Add permissions**
-7. Click **Grant admin consent** for your organization (requires admin privileges)
+📁 Blob Storage ($5/month)
+   ├── Documents
+   ├── Profile Photos (Microsoft Graph)
+   └── Receipts
 
-### Step 3: Get your Application (client) ID and Tenant ID
+⚡ Redis Cache (FREE TIER)
+   └── Real-time sessions
+```
 
-1. In your app registration, go to **Overview**
-2. Copy the **Application (client) ID**
-3. Copy the **Directory (tenant) ID**
+### **AI Engine:**
+- **Claude API** (Anthropic) - Main AI brain
+- Autonomous decision making
+- Predictive analytics
+- Natural language processing
+- Document generation
 
-## Installation
+### **Integrations:**
+- Microsoft Dynamics 365 HR
+- Microsoft Dynamics 365 F&O
+- Microsoft Dynamics 365 CRM
+- Microsoft 365 (Calendar, Teams, Email)
+- Microsoft Graph API (profiles, photos)
+- Azure DevOps
+- GitHub
 
-1. Clone the repository:
+## 💰 Cost Estimate (Optimized)
+
+| Service | Monthly Cost | Notes |
+|---------|-------------|-------|
+| Azure Static Web Apps | $0-9 | Free tier available |
+| Azure Functions | $10-50 | Serverless, pay per use |
+| **Cosmos DB** | **$0** | **FREE TIER!** |
+| **Table Storage** | **$1-2** | **Super cheap** |
+| **Blob Storage** | **$5** | Document storage |
+| **Redis Cache** | **$0** | **FREE TIER!** |
+| Claude API | $50-200 | AI operations |
+| **Total** | **~$66-266/month** | |
+
+**Per employee (50 users): ~$1.50-5/month** 🎉
+
+**Cost Savings vs SQL Server: ~$50-100/month!**
+
+## 🚀 Quick Start
+
+### Prerequisites:
+- Azure subscription
+- Azure AD tenant (already configured)
+  - Client ID: `68d7fcd3-6db4-427e-a2be-f1c8d914b555`
+  - Tenant ID: `ce5c9e34-9906-4081-8a98-69ec394244f1`
+- GitHub account
+- Node.js 18+ (for local development)
+
+### 1. Clone Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/SajeerAssiz/TSC_ExpenseSheet.git
 cd TSC_ExpenseSheet
 ```
 
-2. Install dependencies:
+### 2. Current Deployment (GitHub Pages)
+Currently deployed at: https://sajeerassiz.github.io/TSC_ExpenseSheet/
+
+### 3. Deploy to Azure (Next Step)
+
+#### Create Azure Static Web App:
 ```bash
-npm install
+az staticwebapp create \
+  --name tsc-business-platform \
+  --resource-group your-resource-group \
+  --location "East US 2" \
+  --source https://github.com/SajeerAssiz/TSC_ExpenseSheet \
+  --branch main \
+  --app-location "/" \
+  --login-with-github
 ```
 
-3. Configure authentication:
-   - Open `src/authConfig.js`
-   - Replace `YOUR_CLIENT_ID` with your Application (client) ID
-   - Replace `YOUR_TENANT_ID` with your Directory (tenant) ID
-
-```javascript
-export const msalConfig = {
-  auth: {
-    clientId: "your-client-id-here",
-    authority: "https://login.microsoftonline.com/your-tenant-id-here",
-    redirectUri: window.location.origin,
-  },
-  // ...
-};
+#### Create Cosmos DB (FREE TIER):
+```bash
+az cosmosdb create \
+  --name tsc-platform-db \
+  --resource-group your-resource-group \
+  --default-consistency-level Session \
+  --enable-free-tier true \
+  --locations regionName="East US 2" failoverPriority=0
 ```
 
-## Running the Application
+#### Create Storage Account:
+```bash
+az storage account create \
+  --name tscplatformstorage \
+  --resource-group your-resource-group \
+  --location "East US 2" \
+  --sku Standard_LRS
+```
 
-Start the development server:
+### 4. Update Azure AD Redirect URI
+
+Add new redirect URI: `https://tsc-business-platform.azurestaticapps.net`
+
+### 5. Configure GitHub Secrets
+
+Add these secrets to GitHub repository Settings → Secrets:
+- `AZURE_STATIC_WEB_APPS_API_TOKEN` - From Azure Static Web Apps
+- `COSMOS_DB_CONNECTION_STRING` - From Cosmos DB
+- `STORAGE_CONNECTION_STRING` - From Storage Account
+- `CLAUDE_API_KEY` - From Anthropic (future)
+
+### 6. Auto-Deploy with GitHub Actions
+
+✅ GitHub Actions workflow already configured!
+- File: `.github/workflows/azure-static-web-apps.yml`
+- Triggers: Push to main or any `claude/*` branch
+- Auto-deploys to Azure Static Web Apps
 
 ```bash
-npm run dev
+git add .
+git commit -m "Deploy to Azure"
+git push origin main
 ```
 
-The application will be available at `http://localhost:5173`
-
-## Building for Production
-
-Build the application:
-
-```bash
-npm run build
-```
-
-The production-ready files will be in the `dist` folder.
-
-Preview the production build:
-
-```bash
-npm run preview
-```
-
-## Project Structure
+## 📁 Project Structure
 
 ```
 TSC_ExpenseSheet/
-├── src/
-│   ├── components/
-│   │   ├── EmployeeDirectory.jsx    # Main employee display component
-│   │   └── EmployeeDirectory.css    # Employee directory styles
-│   ├── services/
-│   │   └── employeeService.js       # Microsoft Graph API service
-│   ├── App.jsx                      # Main app component with auth
-│   ├── App.css                      # App styles
-│   ├── authConfig.js                # MSAL configuration
-│   ├── main.jsx                     # App entry point
-│   └── index.css                    # Global styles
-├── package.json
-└── README.md
+├── .github/
+│   └── workflows/
+│       └── azure-static-web-apps.yml    # CI/CD automation
+├── data/
+│   └── employees.json                    # Employee data (JSON storage)
+├── src/                                  # React app (future)
+├── api/                                  # Azure Functions (future)
+├── index.html                            # Main employee directory
+├── profile-v*.html                       # Profile page versions (iterative development)
+│   ├── profile-v10.html                 # Latest stable version
+│   └── profile-v11.html                 # Work in progress
+└── README.md                             # This file
 ```
 
-## Usage
+## 🤖 AI Capabilities (Planned)
 
-1. Open the application in your browser
-2. Click "Sign In with Microsoft"
-3. Authenticate with your Office 365 credentials
-4. Grant consent for the required permissions (if prompted)
-5. View all employees in your organization with their photos
+### Autonomous Project Manager:
+- ✅ Intelligent task assignment based on skills and workload
+- ✅ Real-time workload balancing across team
+- ✅ Predictive risk detection (deadline misses, overload)
+- ✅ Automated decision making with explanation
+- ✅ Performance coaching and recommendations
 
-## Troubleshooting
+### Analytics & Insights:
+- ✅ Employee efficiency scoring
+- ✅ Team productivity trends
+- ✅ Project health monitoring
+- ✅ Resource optimization
+- ✅ Predictive forecasting
 
-### Authentication Issues
+### Natural Language:
+- ✅ AI chatbot for HR questions
+- ✅ Document generation (proposals, SOWs)
+- ✅ Report summarization
+- ✅ Policy interpretation
 
-- **Error: "AADSTS50011: The reply URL specified in the request does not match"**
-  - Make sure the redirect URI in Azure AD matches your application URL exactly
-  - For development, use `http://localhost:5173`
+## 🔐 Security
 
-- **Error: "Insufficient privileges to complete the operation"**
-  - Ensure `User.Read.All` permission is granted
-  - Make sure admin consent has been granted for your organization
+- ✅ Azure AD authentication
+- ✅ Microsoft Graph API (secure data access)
+- ✅ Role-based access control (RBAC)
+- ✅ Data encryption at rest and in transit
+- ✅ API key management via Azure Key Vault (planned)
+- ✅ Audit logging
 
-### No Photos Displayed
+## 📊 Development Roadmap
 
-- Some users may not have profile photos in Office 365
-- The application will display initials as a fallback
-- Administrators can upload photos in the Microsoft 365 admin center
+### ✅ Phase 1: Foundation (Completed)
+- [x] Employee profiles
+- [x] Organization hierarchy visualization
+- [x] Photo upload (Microsoft Graph)
+- [x] Azure AD authentication
+- [x] GitHub Pages deployment
+- [x] Multiple profile page iterations (v1-v11)
 
-### Rate Limiting
+### 🔄 Phase 2: Azure Migration (Current - Week 1-2)
+- [x] GitHub Actions CI/CD setup
+- [ ] Deploy to Azure Static Web Apps
+- [ ] Cosmos DB setup (FREE tier)
+- [ ] Table Storage integration
+- [ ] Blob Storage for documents
+- [ ] Update redirect URIs
 
-- Microsoft Graph API has rate limits
-- If you have many users, the application fetches photos in parallel
-- Consider implementing pagination for very large organizations
+### 🔄 Phase 3: Data Architecture (Week 3-4)
+- [ ] Migrate from JSON to Cosmos DB
+- [ ] Employee extended profiles
+- [ ] Project and task data models
+- [ ] Work logging system
+- [ ] Basic dashboards
 
-## Technologies Used
+### 🚀 Phase 4: AI Project Manager (Week 5-8)
+- [ ] Claude API integration
+- [ ] Task assignment algorithm
+- [ ] Autonomous monitoring engine
+- [ ] Risk detection system
+- [ ] Performance analytics
 
-- **React** - UI framework
-- **Vite** - Build tool and development server
-- **MSAL** (@azure/msal-browser, @azure/msal-react) - Microsoft authentication
-- **Microsoft Graph Client** (@microsoft/microsoft-graph-client) - API client
-- **CSS** - Styling with modern flexbox and grid layouts
+### 🚀 Phase 5: Pre-Sales Module (Week 9-12)
+- [ ] Lead management
+- [ ] AI proposal generation
+- [ ] Pipeline visualization
+- [ ] Forecasting
+- [ ] D365 CRM integration
 
-## Security Considerations
+### 🚀 Phase 6: Sales & PM (Week 13-20)
+- [ ] Sales pipeline management
+- [ ] Project planning & tracking
+- [ ] Resource allocation
+- [ ] Budget management
+- [ ] D365 F&O integration
 
-- Access tokens are stored in session storage
-- The application only requests necessary permissions
-- All API calls are made client-side using the user's credentials
-- No sensitive data is stored locally
+### 🚀 Phase 7: Documentation & Scoping (Week 21-24)
+- [ ] Requirements gathering
+- [ ] AI-powered SOW generation
+- [ ] Effort estimation
+- [ ] Documentation templates
+- [ ] Knowledge base
 
-## License
+## 🔄 Version History
 
-MIT
+### Current Profile Page Versions:
+- **v1-v5**: Initial iterations, authentication fixes
+- **v6**: Empty field validation
+- **v7**: User.ReadWrite.All permission scope
+- **v8**: Extended profile fields (birthday, skills, etc.)
+- **v9**: Read-only field fixes, collapsible debug console
+- **v10**: Only writable fields (latest stable)
+- **v11**: JSON storage approach (in development)
 
-## Support
+## 🤝 D365 Integration Strategy
 
-For issues and questions:
-- Check Azure AD application configuration
-- Review browser console for error messages
-- Ensure all required permissions are granted
-- Verify your Office 365 tenant is properly configured
+### Data Flow:
+```
+Employee Hub (Custom UI)
+    ↓
+Azure Functions (Integration Layer)
+    ↓
+┌─────────────┬──────────────┬─────────────┐
+│  D365 HR    │  Cosmos DB   │  Claude AI  │
+│  (Read)     │  (Read/Write)│  (Analyze)  │
+└─────────────┴──────────────┴─────────────┘
+```
 
-## Future Enhancements
+### What Comes from D365:
+- Employee master data (name, ID, email)
+- Organization structure
+- Position information
+- Employment status
 
-Potential improvements:
-- Add search and filter functionality
-- Implement pagination for large organizations
-- Add department-based filtering
-- Include org chart visualization
-- Export employee list to CSV
-- Dark mode support
+### What Stays in Platform:
+- Extended profile fields
+- Task assignments (AI-generated)
+- Work logs and metrics
+- AI decisions and insights
+- Custom workflows
+
+## 🛠️ Technologies
+
+### Current:
+- HTML/CSS/JavaScript
+- Microsoft Graph API
+- MSAL (Microsoft Authentication)
+- GitHub Pages
+- JSON data storage
+
+### Planned:
+- React (frontend framework)
+- Azure Functions (Node.js/TypeScript)
+- Azure Cosmos DB (NoSQL)
+- Azure Table Storage
+- Azure Blob Storage
+- Claude API (Anthropic)
+- Azure Static Web Apps
+
+## 📞 Support
+
+**Primary Contact**: assiz@thesolutionglobal.com
+
+**Development Team**: The Solution Consulting FZCO
+
+## 📝 License
+
+Proprietary - The Solution Consulting FZCO
+
+## 🎯 Current Status
+
+**Version**: 0.2-alpha
+**Last Updated**: October 31, 2025
+**Current Branch**: `claude/react-office365-employees-011CUdjGWThHpxZ95PVjAdZM`
+**Status**: Active Development
+**Next Milestone**: Azure Static Web Apps deployment with Cosmos DB
+
+## 🌟 Key Differentiators
+
+1. **AI-First Approach**: Claude AI at the core, not just an add-on
+2. **Hybrid Data Strategy**: Cost-optimized mix of Cosmos DB, Table Storage, Blob Storage
+3. **Modular Architecture**: Each business area is a separate, scalable module
+4. **D365 Integration**: Leverages existing Microsoft investments
+5. **Autonomous Operations**: AI makes decisions, not just recommendations
+6. **Cost Effective**: ~$1.50-5 per employee per month
+
+---
+
+**Built with ❤️ by The Solution Consulting FZCO**
+**Powered by Claude AI 🤖**
+**Deployed on Microsoft Azure ☁️**
