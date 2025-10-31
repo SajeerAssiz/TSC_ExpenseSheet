@@ -438,6 +438,20 @@
 
         // Check if user is signed in
         window.addEventListener('load', async () => {
+            // Handle redirect response from consent
+            try {
+                const redirectResponse = await myMSALObj.handleRedirectPromise();
+                if (redirectResponse) {
+                    myMSALObj.setActiveAccount(redirectResponse.account);
+                    console.log('Redirect response received, consent granted');
+                }
+            } catch (error) {
+                console.error('Redirect error:', error);
+                hideLoading();
+                showAlert('Failed to process consent. Please try again.', 'error');
+                return;
+            }
+
             const accounts = myMSALObj.getAllAccounts();
             if (accounts.length > 0) {
                 myMSALObj.setActiveAccount(accounts[0]);
@@ -478,16 +492,10 @@
                 console.error('Token error:', error);
 
                 // Try interactive login if silent fails (e.g., consent needed)
-                if (error.name === 'InteractionRequiredAuthError' || error.errorCode === 'consent_required' || error.errorCode === 'interaction_required') {
-                    try {
-                        const response = await myMSALObj.acquireTokenPopup(loginRequest);
-                        accessToken = response.accessToken;
-                        await loadUserProfile();
-                    } catch (popupError) {
-                        console.error('Popup error:', popupError);
-                        hideLoading();
-                        showAlert('You need to grant permission to edit your profile. Please try again and accept the permissions.', 'error');
-                    }
+                if (error.name === 'InteractionRequiredAuthError' || error.errorCode === 'consent_required' || error.errorCode === 'interaction_required' || error.errorCode === 'invalid_grant') {
+                    // Use redirect instead of popup due to GitHub Pages COOP policy
+                    console.log('Consent required - redirecting to login...');
+                    await myMSALObj.acquireTokenRedirect(loginRequest);
                 } else {
                     hideLoading();
                     showAlert('Failed to authenticate. Please try signing in again.', 'error');
