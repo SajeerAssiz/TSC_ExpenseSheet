@@ -476,7 +476,22 @@
                 await loadUserProfile();
             } catch (error) {
                 console.error('Token error:', error);
-                showAlert('Failed to authenticate. Please try again.', 'error');
+
+                // Try interactive login if silent fails (e.g., consent needed)
+                if (error.name === 'InteractionRequiredAuthError' || error.errorCode === 'consent_required' || error.errorCode === 'interaction_required') {
+                    try {
+                        const response = await myMSALObj.acquireTokenPopup(loginRequest);
+                        accessToken = response.accessToken;
+                        await loadUserProfile();
+                    } catch (popupError) {
+                        console.error('Popup error:', popupError);
+                        hideLoading();
+                        showAlert('You need to grant permission to edit your profile. Please try again and accept the permissions.', 'error');
+                    }
+                } else {
+                    hideLoading();
+                    showAlert('Failed to authenticate. Please try signing in again.', 'error');
+                }
             }
         }
 
