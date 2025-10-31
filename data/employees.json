@@ -1,0 +1,33 @@
+{
+  "employees": [
+    {
+      "email": "assiz@thesolutionglobal.com",
+      "contactInfo": {
+        "streetAddress": "",
+        "city": "Dubai",
+        "state": "",
+        "zipCode": "",
+        "country": "United Arab Emirates",
+        "businessPhone": "",
+        "mobilePhone": "",
+        "otherEmails": [],
+        "proxyAddresses": [],
+        "faxNumber": "",
+        "imAddresses": [],
+        "mailNickname": "assiz"
+      },
+      "jobInfo": {
+        "jobTitle": "Principal Consultant, Partner",
+        "companyName": "The Solution Consulting FZCO",
+        "department": "",
+        "employeeId": "",
+        "employeeType": "",
+        "employeeHireDate": "",
+        "employeeOrgData": "",
+        "officeLocation": "Dubai",
+        "managerId": ""
+      },
+      "lastUpdated": "2025-10-31T07:30:00Z"
+    }
+  ]
+}
