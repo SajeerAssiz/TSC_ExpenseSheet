@@ -1,6 +1,35 @@
 # Profile Page Versions
 
-## Version 3 (profile-v3.html) - Current Testing Version  🔥
+## Version 4 (profile-v4.html) - Current Testing Version 🔥
+**Status**: Testing - Bug Fixed!
+**Date**: 2025-10-31
+
+### BUG FIX:
+- ✅ **FIXED**: TypeError: console.log is not a function
+- Problem: Variable name `console` shadowed global `console` object
+- Solution: Renamed to `debugDiv` and use `window.console` explicitly
+- Debug console now works properly!
+
+### Features:
+- VERSION 4 badge in navbar center
+- Working debug console at bottom
+- Extensive logging of authentication flow
+- First message: "Profile page v4 loaded - Bug fixed!"
+
+### Test URL:
+https://sajeerassiz.github.io/TSC_ExpenseSheet/profile-v4.html
+
+### How to Test:
+1. Clear browser cache (Ctrl+Shift+Delete)
+2. Go to: https://sajeerassiz.github.io/TSC_ExpenseSheet/
+3. Sign in
+4. Click "My Profile" → Goes to v4 automatically
+5. Look for "VERSION 4" badge in navbar center
+6. Check debug console at bottom - should show messages!
+
+---
+
+## Version 3 (profile-v3.html) - Previous Version
 **Status**: Testing with Debug Console
 **Date**: 2025-10-31
 
