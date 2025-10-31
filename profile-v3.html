@@ -306,17 +306,15 @@
         }
 
         .version-badge {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background: #ff6b6b;
+            background: rgba(255, 255, 255, 0.2);
             color: white;
-            padding: 8px 16px;
+            padding: 6px 16px;
             border-radius: 20px;
             font-weight: bold;
             font-size: 14px;
-            z-index: 9999;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
         }
 
         .debug-console {
@@ -369,9 +367,6 @@
     </style>
 </head>
 <body>
-    <!-- Version Badge -->
-    <div class="version-badge">VERSION 3</div>
-
     <!-- Debug Console -->
     <div class="debug-console" id="debugConsole">
         <div class="debug-line debug-info">Debug Console - Version 3</div>
@@ -383,6 +378,7 @@
             <h1>My Profile</h1>
             <a href="index.html" class="nav-link">← Back to Directory</a>
         </div>
+        <div class="version-badge">VERSION 3</div>
         <button id="authButton" class="auth-button" onclick="signOut()">Sign Out</button>
     </nav>
 
