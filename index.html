@@ -31,9 +31,34 @@
             align-items: center;
         }
 
+        .nav-left {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
         .navbar h1 {
             font-size: 1.5rem;
             font-weight: 600;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
         }
 
         .auth-button {
@@ -250,8 +275,13 @@
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
-        <h1>Office 365 Employee Directory</h1>
-        <button id="authButton" class="auth-button" onclick="handleAuth()">Sign In with Microsoft</button>
+        <div class="nav-left">
+            <h1>Office 365 Employee Directory</h1>
+        </div>
+        <div class="nav-buttons">
+            <a href="profile.html" id="profileLink" class="nav-link" style="display: none;">My Profile</a>
+            <button id="authButton" class="auth-button" onclick="handleAuth()">Sign In with Microsoft</button>
+        </div>
     </nav>
 
     <!-- Main Content -->
@@ -365,6 +395,7 @@
                 // Update UI
                 document.getElementById('welcomeScreen').classList.add('hidden');
                 document.getElementById('authButton').textContent = 'Sign Out';
+                document.getElementById('profileLink').style.display = 'block';
 
                 // Load employees
                 await loadEmployees();
